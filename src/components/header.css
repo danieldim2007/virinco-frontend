@@ -1,0 +1,45 @@
+
+.header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background:hsl(0, 0%, 100%);
+}
+
+
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.logo{
+    width: 13rem;
+}
+
+.logo span{
+    color: hsl(196, 79%, 72%);
+}
+
+.logo_links{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.image{
+    width: 90px;
+}
+
+.image_second{
+    width: 70px;
+}
+
+.image_third{
+    width: 70px;
+}

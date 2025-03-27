@@ -1,0 +1,99 @@
+{
+    "name": "as.up.data.forward",
+    "time": "2025-03-06T08:12:16.755306670Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "testsensortempsiste",
+          "application_ids": {
+            "application_id": "badevann2024"
+          },
+          "dev_eui": "AA6500000000010B",
+          "join_eui": "AA8966E800000182",
+          "dev_addr": "260BC7EB"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "testsensortempsiste",
+        "application_ids": {
+          "application_id": "badevann2024"
+        },
+        "dev_eui": "AA6500000000010B",
+        "join_eui": "AA8966E800000182",
+        "dev_addr": "260BC7EB"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNN86B901DMY9GVVS6VWK6JH"
+      ],
+      "received_at": "2025-03-06T08:12:16.749773730Z",
+      "uplink_message": {
+        "session_key_id": "AZIty7SSZJgS08oOsrI1QA==",
+        "f_port": 2,
+        "f_cnt": 5804,
+        "frm_payload": "+gHJAAQBEwACATsAAAnFOwAABVQ8AAAIMs6kvw==",
+        "rx_metadata": [
+          {
+            "gateway_ids": {
+              "gateway_id": "im-2024-badevann",
+              "eui": "C0EE40FFFF2A0FC4"
+            },
+            "timestamp": 2160407172,
+            "rssi": -49,
+            "channel_rssi": -49,
+            "snr": 9.5,
+            "uplink_token": "Ch4KHAoQaW0tMjAyNC1iYWRldmFubhIIwO5A//8qD8QQhOWUhggaDAjgsaW+BhCv+7CDAiCgp7WS8I06",
+            "channel_index": 6,
+            "received_at": "2025-03-06T08:12:16.523336468Z"
+          }
+        ],
+        "settings": {
+          "data_rate": {
+            "lora": {
+              "bandwidth": 125000,
+              "spreading_factor": 7,
+              "coding_rate": "4/5"
+            }
+          },
+          "frequency": "867700000",
+          "timestamp": 2160407172
+        },
+        "received_at": "2025-03-06T08:12:16.545349281Z",
+        "consumed_airtime": "0.087296s",
+        "locations": {
+          "user": {
+            "latitude": 59.76082,
+            "longitude": 10.11701,
+            "source": "SOURCE_REGISTRY"
+          }
+        },
+        "network_ids": {
+          "net_id": "000013",
+          "ns_id": "EC656E0000000181",
+          "tenant_id": "ttn",
+          "cluster_id": "eu1",
+          "cluster_address": "eu1.cloud.thethings.network"
+        },
+        "last_battery_percentage": {
+          "f_cnt": 5782,
+          "value": 93.28063,
+          "received_at": "2025-03-05T17:37:04.153930524Z"
+        }
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNN86B901DMY9GVVS6VWK6JH"
+    ],
+    "origin": "ip-10-100-5-252.eu-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgN0dG4="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNN86BFKTRYD6HCDP3G3A6NE"
+  }

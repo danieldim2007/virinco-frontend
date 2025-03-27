@@ -1,0 +1,64 @@
+
+.cards_box{
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card{
+    position: relative;
+    background-color: hsl(196, 81%, 47%);
+    width: 230px;
+    height: 150px;
+    background-image: linear-gradient(
+    to top, hsl(196, 82%, 81%) ,hsla(196, 81%, 81%, 0.811),
+    hsl(196, 81%, 47%) ,rgb(23, 165, 217) , 
+    transparent);
+    border-radius: 1rem;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.card:hover{
+    box-shadow: 
+    0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075),
+    0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075),
+    0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
+
+.card_title{
+    color: hsl(0, 0%, 100%);
+    font-weight: 200;
+    font-size: 1.75rem;
+    padding-left: 1.5rem;
+    padding-top: 0.75rem;
+}
+
+.card_temp{
+    font-weight: bold;
+    font-size: 4rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: hsl(0, 0%, 100%);
+    font-family: var(--main-font);
+
+}
+
+.card_temp span{
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    color: hsl(0, 0%, 100%);
+    font-family: var(--main-font);
+}
+
+.card_icon{
+    position: absolute;
+    right: 1rem;
+    bottom: 0.75rem;
+}
