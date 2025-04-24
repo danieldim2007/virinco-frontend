@@ -1,59 +1,89 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet.heat';
 import "./map.css";
 
 const Map = () => {
-  // Eksempel på GeoJSON-data (polygon)
-  const geojsonData = {
-    type: 'Feature',
-    geometry: {
-      type: 'Polygon',
-      coordinates: [[[10.2, 59.7], [10.3, 59.7], [10.3, 59.8], [10.2, 59.8], [10.2, 59.7]]] // Et enkelt firkantområde i nærheten av Drammen
-    }
-  };
+  const [sensorData, setSensorData] = useState([]);
+  const [heatData, setHeatData] = useState([]);
 
-  // Heatmap-støtte
+  // Hente data fra API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8884/api/sensors');
+        const data = await response.json();
+
+        console.log("Data fra API:", data); // Logg API-responsen
+
+        if (data && data.sensors && Array.isArray(data.sensors)) {
+          const validSensors = data.sensors.filter(sensor => 
+            sensor.Latitude && sensor.Longitude && sensor.Temp
+          );
+
+          console.log("Gyldige sensorer:", validSensors); // Logg gyldige sensorer
+
+          setSensorData(validSensors);
+
+          const heatMapPoints = validSensors.map(sensor => [
+            sensor.Latitude, 
+            sensor.Longitude, 
+            sensor.Temp // Bruker Temp som verdi for Heatmap
+          ]);
+          setHeatData(heatMapPoints);
+        } else {
+          console.error("Forventet 'sensors' nøkkel med en array, men fikk noe annet:", data);
+        }
+      } catch (error) {
+        console.error('Error fetching sensor data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Heatmap-lag
   const HeatmapLayer = () => {
     const map = useMap();
 
     useEffect(() => {
-      const heat = L.heatLayer(
-        [
-          //sensorer
-        ],
-        { radius: 30, blur: 15, maxZoom: 17 } // Maks zoom for heatmap laget
-      );
-      heat.addTo(map);
-    }, [map]);
+      if (heatData.length > 0) {
+        const heat = L.heatLayer(heatData, {
+          radius: 10,  // Gjør sirklene mindre, endre denne verdien etter behov
+          blur: 15, 
+          maxZoom: 17
+        });
+        heat.addTo(map);
+      }
+    }, [heatData, map]);
 
     return null;
   };
 
   return (
     <div className='map_data'>
-      <MapContainer 
+      <MapContainer
         center={[59.743, 10.204]} // Sentrering på Drammen
-        zoom={13} 
+        zoom={12} 
         style={{ height: '480px', width: '100%', borderRadius: "1rem" }}
-        minZoom={4}  // Setter minimum zoom-nivå
-        maxZoom={17} // Setter maksimum zoom-nivå
+        minZoom={10}  // Setter minimum zoom-nivå
+        maxZoom={23} // Setter maksimum zoom-nivå
         maxBounds={[
-          [59.3, 9.8],  // Sørvestlig hjørne (bittelitt sørligere og vestligere)
-          [60.2, 10.7]  // Nordøstlig hjørne (bittelitt nordligere og østligere)
+          [59.3, 9.8],  // Sørvestlig hjørne
+          [60.2, 10.7]  // Nordøstlig hjørne
         ]}
         maxBoundsViscosity={1.0} // Sørger for at kartet ikke går utenfor grensene
       >
         {/* Bruk en blåere flisestil */}
         <TileLayer
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-          attribution="&copy; <a href='https://stadiamaps.com/'>Stadia Maps</a> contributors"
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {/* Heatmap-lag */}
+        {/* Legg til Heatmap-lag */}
         <HeatmapLayer />
       </MapContainer>
     </div>

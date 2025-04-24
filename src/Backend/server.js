@@ -1,7 +1,7 @@
 
-require('dotenv');
+require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql12');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 const app  = express();
@@ -25,7 +25,8 @@ db.connect(err => {
 });
 
 app.get('/sensors', (req, res) =>{
-    const sql = 'SELECT lat, lng, temperature FROM sensors';
+    // const sql = 'SELECT Latitude, Longitude, Temp FROM data_table';
+    const sql = 'SELECT Latitude, Longitude, Temp, ID, SensorID, Time FROM data_table';
     db.query(sql, (err, results) =>{
         if(err){
             return res.status(500).json({error: err.message});
